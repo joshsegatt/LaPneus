@@ -31,18 +31,20 @@ function copyDirSync(src, dest) {
   }
 }
 
-// 2. Copier les fichiers du dossier preview vers dist root
+// 2. Copier les fichiers du dossier preview vers dist root et ROOT_DIR
 const previewFiles = fs.readdirSync(PREVIEW_DIR);
 for (const file of previewFiles) {
   const src = path.join(PREVIEW_DIR, file);
-  const dest = path.join(DIST_DIR, file);
+  const destDist = path.join(DIST_DIR, file);
+  const destRoot = path.join(ROOT_DIR, file);
   if (fs.statSync(src).isFile()) {
-    fs.copyFileSync(src, dest);
-    console.log(`✓ Copié: preview/${file} -> dist/${file}`);
+    fs.copyFileSync(src, destDist);
+    fs.copyFileSync(src, destRoot);
+    console.log(`✓ Copié: preview/${file} -> dist/${file} & root/${file}`);
   }
 }
 
-// 3. Copier public/ vers dist/public/ et dist/assets/
+// 3. Copier public/ vers dist/public/ et dist/assets/ et root/assets/
 if (fs.existsSync(PUBLIC_DIR)) {
   copyDirSync(PUBLIC_DIR, path.join(DIST_DIR, 'public'));
   console.log('✓ Copié: public/ -> dist/public/');
@@ -50,7 +52,8 @@ if (fs.existsSync(PUBLIC_DIR)) {
   const publicAssets = path.join(PUBLIC_DIR, 'assets');
   if (fs.existsSync(publicAssets)) {
     copyDirSync(publicAssets, path.join(DIST_DIR, 'assets'));
-    console.log('✓ Copié: public/assets/ -> dist/assets/ (double compatibilité de chemins)');
+    copyDirSync(publicAssets, path.join(ROOT_DIR, 'assets'));
+    console.log('✓ Copié: public/assets/ -> dist/assets/ et root/assets/ (compatibilité maximale)');
   }
 }
 
