@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = process.env.PORT || 3000;
-const ROOT_DIR = __dirname;
+const ROOT_DIR = path.resolve(__dirname, '..');
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -93,19 +93,10 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`=================================================`);
-  console.log(`  L.A PNEUS - Serveur de Développement Local     `);
+  console.log(`\n  ======================================================`);
+  console.log(`  🚀 L.A Pneus - Serveur de Développement Local`);
+  console.log(`  ======================================================`);
   console.log(`  URL locale    : http://localhost:${PORT}`);
-  console.log(`  URL preview   : http://localhost:${PORT}/preview/index.html`);
-  console.log(`=================================================`);
-});
-
-server.on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    const nextPort = Number(PORT) + 1;
-    console.warn(`Port ${PORT} já em uso, iniciando no port ${nextPort}...`);
-    server.listen(nextPort);
-  } else {
-    console.error('Erreur du serveur:', err);
-  }
+  console.log(`  URL tarifs    : http://localhost:${PORT}/tarifs`);
+  console.log(`  ======================================================\n`);
 });

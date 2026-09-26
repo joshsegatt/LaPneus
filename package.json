@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "L.A Pneus - Atelier mobile Genève et Vaud",
   "scripts": {
-    "start": "node server.js",
+    "start": "node scripts/dev-server.js",
     "build": "node scripts/build.js",
     "test": "node tests/check_preview.js"
   },
