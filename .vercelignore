@@ -1,9 +1,0 @@
-server.js
-tests/
-docs/
-google-sheets/
-scripts/cutout-floodfill.ps1
-scripts/cutout-tires.ps1
-scripts/generate_logo_assets.py
-scripts/make-tires-transparent.ps1
-scripts/process-images.ps1
