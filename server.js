@@ -26,11 +26,11 @@ const MIME_TYPES = {
 const server = http.createServer((req, res) => {
   let reqPath = decodeURI(req.url.split('?')[0]);
 
-  // If user visits root '/', redirect seamlessly to /preview/index.html
+  // If user visits root '/', serve preview/index.html directly without redirect
   if (reqPath === '/' || reqPath === '') {
-    res.writeHead(302, { 'Location': '/preview/index.html' });
-    res.end();
-    return;
+    reqPath = '/preview/index.html';
+  } else if (reqPath === '/tarifs') {
+    reqPath = '/preview/tarifs.html';
   }
 
   // Resolve safe file path
