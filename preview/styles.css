@@ -1,0 +1,4000 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Barlow+Condensed:wght@700;800;900&display=swap');
+
+:root {
+  /* Palette de Marque L.A Pneus (Amarelo de Frota Calibrado & Confortável // Padrão Porsche / Apple Luxury) */
+  --color-fleet-yellow: #E5C33A;
+  --color-fleet-yellow-hover: #D4B22B;
+  --color-fleet-yellow-subtle: rgba(229, 195, 58, 0.08);
+  --color-fleet-yellow-border: rgba(229, 195, 58, 0.22);
+
+  /* Noirs & Surfaces Techniques (Padrão Porsche Tequipment / Apple Pro) */
+  --color-panel-header: #131417;
+  --color-panel-page: #0E0E10;
+  --color-panel-surface: #17181C;
+  --color-panel-surface-elevated: #1E2026;
+  --color-panel-input: #111114;
+
+  /* Fond Papier Chaud Suisse (Padrão Off-white) */
+  --color-cream-page: #F6F5F0;
+  --color-cream-surface: #EDEAE1;
+  --color-white-card: #FFFFFF;
+
+  /* Textes & Contrastes Suaves para Conforto de Leitura (Apple HIG Standard) */
+  --color-text-main-dark: #1D1D1F;
+  --color-text-sub-dark: #5A5E68;
+
+  --color-text-main-light: #F5F5F7;
+  --color-text-sub-light: #A6ABB6;
+  --color-text-dim-light: #7A7F8B;
+
+  /* Borduras Hairline Usinadas (1px) */
+  --color-border-dark: #2C303A;
+  --color-border-hairline: rgba(255, 255, 255, 0.08);
+  --color-border-light: #DDD9CE;
+  --color-border-input: #32353D;
+  --color-error: #E53935;
+  --color-status-green: #2ECC71;
+
+  /* Tipografia Apple HIG de Alta Precisão & Conforto Visual */
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+  --font-brand: 'Barlow Condensed', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Geometria de Chapa & Espaçamento (Apple HIG Squircle & Elite Elevation) */
+  --radius-chapa: 20px;
+  --radius-card: 20px;
+  --radius-card-sm: 14px;
+  --radius-card-lg: 24px;
+  --radius-pill: 9999px;
+  --radius-dock: 14px;
+  --content-width: 1140px;
+  --gutter-mobile: 20px;
+  --gutter-desktop: 32px;
+}
+
+/* Reset técnico & Acessibilidade */
+html {
+  scroll-behavior: smooth;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+[role="button"] {
+  cursor: pointer;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--color-fleet-yellow);
+  color: var(--color-panel-header);
+  padding: 10px 18px;
+  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 16px;
+  text-transform: uppercase;
+  border-radius: var(--radius-chapa);
+  z-index: 10000;
+  transition: top 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 16px;
+  outline: 2px solid var(--color-fleet-yellow-hover);
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: var(--color-fleet-yellow);
+  color: #0E0E10;
+}
+
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.62;
+  letter-spacing: -0.006em;
+  color: var(--color-text-main-dark);
+  background-color: var(--color-cream-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  padding-bottom: 84px;
+}
+
+@media (min-width: 900px) {
+  body {
+    padding-bottom: 0;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--gutter-mobile);
+  padding-right: var(--gutter-mobile);
+}
+
+@media (min-width: 900px) {
+  .container {
+    padding-left: var(--gutter-desktop);
+    padding-right: var(--gutter-desktop);
+  }
+}
+
+/* ==========================================================================
+   TOPBAR TELEMETRIA
+   ========================================================================== */
+.top-bar {
+  background-color: var(--color-panel-page);
+  color: var(--color-text-sub-light);
+  font-size: 13px;
+  border-bottom: 1px solid var(--color-border-hairline);
+  height: 38px;
+  display: none;
+}
+
+@media (min-width: 680px) {
+  .top-bar {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.top-bar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.top-bar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.top-bar-item strong {
+  color: var(--color-fleet-yellow);
+}
+
+.top-bar-phones {
+  display: flex;
+  gap: 16px;
+  font-weight: 700;
+  color: var(--color-text-main-light);
+  font-variant-numeric: tabular-nums;
+}
+
+.top-bar-phones a {
+  transition: color 0.15s ease;
+}
+
+.top-bar-phones a:hover {
+  color: var(--color-fleet-yellow);
+}
+
+/* ==========================================================================
+   HEADER HÁPTICO (APPLE REFINEMENT // VERRE OBSIDIENNE // ZERO CLUTTER)
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  min-height: 64px;
+  background-color: rgba(13, 14, 17, 0.88);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+}
+
+.header-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+}
+
+.brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  justify-self: start;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.brand-shield {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-lockup:hover .brand-shield {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+.brand-name {
+  font-family: var(--font-brand);
+  font-size: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--color-fleet-yellow);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Navigation des Pages (Apple Segmented Pill Craft) */
+.header-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-self: center;
+  gap: 4px;
+  background-color: rgba(20, 22, 28, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 9999px;
+  padding: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.header-nav-link {
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 7px 18px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header-nav-link:hover {
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.header-nav-link.active,
+.header-nav-link[aria-current="page"] {
+  background-color: var(--color-fleet-yellow);
+  color: #0E0E10;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.header-nav-link:focus-visible {
+  outline: 2px solid var(--color-fleet-yellow);
+  outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  .site-header {
+    min-height: auto;
+    padding: 8px 0;
+  }
+
+  .header-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    row-gap: 8px;
+  }
+
+  .brand-lockup {
+    order: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .brand-shield {
+    width: 30px;
+    height: 30px;
+  }
+
+  .brand-name {
+    font-size: 19px;
+  }
+
+  .header-right {
+    order: 2;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+
+  .header-cta-pill {
+    height: 34px;
+    padding: 0 12px;
+    font-size: 11.5px;
+    gap: 6px;
+  }
+
+  .header-nav {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    padding: 3px;
+    margin: 0;
+  }
+
+  .header-nav-link {
+    flex: 1;
+    text-align: center;
+    padding: 6px 12px;
+    font-size: 12.5px;
+  }
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.header-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 16px;
+  background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  border-radius: 9999px;
+  white-space: nowrap;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 2px 12px rgba(220, 38, 38, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: background 0.16s ease, transform 0.1s ease, box-shadow 0.16s ease;
+  cursor: pointer !important;
+}
+
+.header-cta-pill:hover {
+  background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+  box-shadow: 0 4px 18px rgba(220, 38, 38, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+  color: #FFFFFF;
+}
+
+.header-cta-pill:active {
+  transform: scale(0.97);
+}
+
+.header-urgent-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.95);
+  animation: urgentPulse 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes urgentPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+
+.header-urgent-label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+@media (max-width: 480px) {
+  .header-cta-pill {
+    height: 34px;
+    padding: 0 12px;
+    gap: 6px;
+  }
+  .header-urgent-label {
+    font-size: 11.5px;
+    letter-spacing: 0.02em;
+  }
+  .header-urgent-dot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 340px) {
+  .header-cta-pill {
+    padding: 0 9px;
+  }
+  .header-urgent-label {
+    font-size: 10.5px;
+  }
+}
+
+
+/* ==========================================================================
+   BOTÕES & AÇÕES TÁCTEIS (Apple HIG / Linear)
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 24px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  border-radius: var(--radius-chapa);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--color-fleet-yellow);
+  color: #0E0E10;
+  box-shadow: 0 2px 10px var(--color-fleet-yellow-border);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-fleet-yellow-hover);
+  box-shadow: 0 4px 16px rgba(229, 195, 58, 0.28);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--color-fleet-yellow);
+  outline-offset: 3px;
+}
+
+.btn-secondary-dark {
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--color-text-main-light);
+  border: 1px solid var(--color-border-dark);
+}
+
+.btn-secondary-dark:hover {
+  border-color: var(--color-fleet-yellow);
+  color: var(--color-fleet-yellow);
+  background-color: var(--color-fleet-yellow-subtle);
+}
+
+.btn-secondary-dark:focus-visible {
+  outline: 2px solid var(--color-fleet-yellow);
+  outline-offset: 3px;
+}
+
+.btn-secondary-light {
+  background-color: transparent;
+  color: var(--color-text-main-dark);
+  border: 1px solid var(--color-text-main-dark);
+}
+
+.btn-secondary-light:hover {
+  background-color: var(--color-text-main-dark);
+  color: var(--color-text-main-light);
+}
+
+.btn-secondary-light:focus-visible {
+  outline: 2px solid var(--color-text-main-dark);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   HERO: SHOWROOM DE PRECISÃO & BLUEPRINT (PORSCHE / APPLE ARCHITECTURE)
+   ========================================================================== */
+.hero-section {
+  background-color: #E2BE34;
+  background-image:
+    radial-gradient(ellipse at 50% 10%, rgba(255, 235, 120, 0.45) 0%, transparent 65%),
+    radial-gradient(ellipse at 15% 88%, rgba(195, 155, 25, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 88%, rgba(195, 155, 25, 0.22) 0%, transparent 55%),
+    linear-gradient(to right, rgba(14, 14, 16, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(14, 14, 16, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+  color: #0E0E10;
+  padding: 36px 0 0 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-header-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  margin-bottom: 14px;
+  color: #0E0E10;
+  text-wrap: balance;
+}
+
+@media (min-width: 640px) {
+  .hero-title {
+    font-size: 48px;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-title {
+    font-size: 56px;
+    letter-spacing: -0.042em;
+    line-height: 1.04;
+  }
+}
+
+.hero-title-city {
+  display: inline;
+  color: #1F2026;
+  opacity: 0.92;
+  font-weight: 800;
+}
+
+.hero-lead {
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.52;
+  letter-spacing: -0.01em;
+  color: #24252B;
+  font-weight: 500;
+  margin: 0 auto 20px auto;
+  max-width: 640px;
+  text-wrap: pretty;
+}
+
+@media (min-width: 640px) {
+  .hero-lead {
+    font-size: 18px;
+    line-height: 1.48;
+  }
+}
+
+.hero-action-cluster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+@media (min-width: 680px) {
+  .hero-action-cluster {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+}
+
+.btn-hero-cta {
+  background-color: #0E0E10;
+  color: #FFFFFF;
+  border: 1.5px solid #0E0E10;
+  font-size: 14.5px;
+  font-weight: 700;
+  padding: 11px 26px;
+  border-radius: 9999px;
+  letter-spacing: -0.01em;
+  box-shadow: 0 4px 14px rgba(14, 14, 16, 0.22);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-hero-cta:hover {
+  background-color: #1F2026;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(14, 14, 16, 0.3);
+}
+
+.hero-phones-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(14, 14, 16, 0.08);
+  border: 1.5px solid rgba(14, 14, 16, 0.28);
+  border-radius: 9999px;
+  padding: 9px 20px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-phones-bar:hover {
+  background-color: rgba(14, 14, 16, 0.12);
+  border-color: rgba(14, 14, 16, 0.45);
+  transform: translateY(-2px);
+}
+
+.hero-phone-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #0E0E10;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+
+.hero-phone-item:hover {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.hero-phone-sep {
+  color: rgba(14, 14, 16, 0.35);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* ==========================================================================
+   PALCO PANORÂMICO 5 PNEUS (SHOWROOM PORSCHE // CUTOUT 100% TRANSPARENTE)
+   ========================================================================== */
+.hero-tires-stage {
+  position: relative;
+  width: 100%;
+  max-width: 920px;
+  margin: 6px auto -3px auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 3;
+}
+
+.hero-stage-img {
+  width: 100%;
+  max-width: 880px;
+  height: auto;
+  aspect-ratio: 973 / 301;
+  object-fit: contain;
+  display: block;
+  filter:
+    drop-shadow(0 3px 6px rgba(14, 14, 16, 0.10))
+    drop-shadow(0 14px 24px rgba(14, 14, 16, 0.18))
+    drop-shadow(0 28px 46px rgba(14, 14, 16, 0.14));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-tires-stage:hover .hero-stage-img {
+  transform: translateY(-3px) scale(1.012);
+  filter:
+    drop-shadow(0 5px 10px rgba(14, 14, 16, 0.12))
+    drop-shadow(0 18px 30px rgba(14, 14, 16, 0.24))
+    drop-shadow(0 36px 58px rgba(14, 14, 16, 0.18));
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    padding: 22px 0 0 0;
+  }
+  .hero-title {
+    font-size: 28px;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+  .hero-lead {
+    font-size: 14.5px;
+    line-height: 1.45;
+    margin-bottom: 16px;
+    padding: 0 4px;
+  }
+  .hero-action-cluster {
+    margin-bottom: 6px;
+  }
+  .hero-phones-bar {
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 16px;
+    border-radius: 14px;
+  }
+  .hero-phone-sep {
+    display: none;
+  }
+  .hero-tires-stage {
+    margin-top: 6px;
+  }
+}
+
+/* ==========================================================================
+   FAIXA DE CONFIANÇA HERO (APPLE REFINEMENT // SANS ICÔNES // 4 COLUNAS)
+   ========================================================================== */
+.trust-strip-hero {
+  position: relative;
+  border-top: 1px solid rgba(14, 14, 16, 0.16);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  background: linear-gradient(180deg, rgba(16, 17, 21, 0.95) 0%, rgba(10, 11, 14, 0.99) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  z-index: 5;
+  box-shadow: 0 -6px 20px rgba(14, 14, 16, 0.08);
+}
+
+.trust-strip-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.trust-strip-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+  gap: 16px;
+  padding: 16px 0;
+}
+
+@media (min-width: 600px) {
+  .trust-strip-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 960px) {
+  .trust-strip-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 36px;
+    padding: 24px 0;
+  }
+}
+
+.trust-strip-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  border: none;
+}
+
+.trust-strip-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-main-light);
+  line-height: 1.15;
+}
+
+.trust-strip-subtitle {
+  font-size: 13px;
+  color: var(--color-text-sub-light);
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   SEÇÕES GERAIS
+   ========================================================================== */
+.section {
+  padding: 80px 0;
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 48px 0;
+  }
+}
+
+.container.section {
+  padding-left: var(--gutter-mobile);
+  padding-right: var(--gutter-mobile);
+}
+
+@media (min-width: 900px) {
+  .container.section {
+    padding-left: var(--gutter-desktop);
+    padding-right: var(--gutter-desktop);
+  }
+}
+
+.tarifs-main-container {
+  padding-top: 52px;
+  padding-bottom: 84px;
+}
+
+@media (max-width: 640px) {
+  .tarifs-main-container {
+    padding-top: 32px;
+    padding-bottom: 52px;
+  }
+}
+
+.section-dark {
+  background-color: var(--color-panel-page);
+  color: var(--color-text-main-light);
+}
+
+.section-header-center {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 52px auto;
+}
+
+@media (max-width: 640px) {
+  .section-header-center {
+    margin: 0 auto 32px auto;
+  }
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.022em;
+  margin-bottom: 16px;
+  color: var(--color-text-main-dark);
+  text-wrap: balance;
+}
+
+@media (max-width: 640px) {
+  .section-title {
+    font-size: 26px;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+}
+
+@media (min-width: 640px) {
+  .section-title {
+    font-size: 42px;
+    letter-spacing: -0.028em;
+    line-height: 1.12;
+  }
+}
+
+.section-dark .section-title {
+  color: var(--color-text-main-light);
+}
+
+.section-title span.highlight {
+  color: var(--color-text-main-dark);
+  text-decoration: underline;
+  text-decoration-color: var(--color-fleet-yellow);
+  text-underline-offset: 6px;
+  text-decoration-thickness: 3px;
+}
+
+.section-dark .section-title span.highlight {
+  color: var(--color-fleet-yellow);
+  text-decoration: none;
+}
+
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.62;
+  letter-spacing: -0.008em;
+  color: var(--color-text-sub-dark);
+  text-wrap: pretty;
+}
+
+.section-dark .section-subtitle {
+  color: var(--color-text-sub-light);
+}
+
+/* ==========================================================================
+   COMPARADOR DE EXPERIÊNCIA: ATELIER MOBILE VS GARAGE FIXE ($40K CRAFT)
+   ========================================================================== */
+#comparatif {
+  position: relative;
+  overflow: hidden;
+}
+
+#comparatif::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: clamp(280px, 32vw, 520px);
+  height: 100%;
+  background-image: url('../public/assets/tire-track.jpg');
+  background-repeat: repeat-y;
+  background-size: 340px auto;
+  background-position: top left;
+  mix-blend-mode: multiply;
+  opacity: 0.45;
+  filter: contrast(1.25) brightness(0.92);
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 100%),
+              linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0));
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 100%),
+                      linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1) 5%, rgba(0, 0, 0, 1) 95%, rgba(0, 0, 0, 0));
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+
+#comparatif {
+  position: relative;
+  overflow-x: clip;
+}
+
+#comparatif .container {
+  position: relative;
+  z-index: 2;
+}
+
+.comparatif-tires-stack {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: clamp(240px, 22vw, 380px);
+  pointer-events: none;
+  z-index: 1;
+  line-height: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.comparatif-tires-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: bottom right;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.35)) drop-shadow(0 6px 12px rgba(0, 0, 0, 0.2));
+}
+
+@media (max-width: 900px) {
+  .comparatif-tires-stack {
+    display: none;
+  }
+}
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 36px;
+}
+
+@media (min-width: 860px) {
+  .comparison-grid {
+    grid-template-columns: 1fr 1.15fr;
+  }
+}
+
+.comparison-card {
+  border-radius: var(--radius-card, 20px);
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.comparison-traditional {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--color-text-main-dark);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 10px 30px -4px rgba(0, 0, 0, 0.06);
+}
+
+.comparison-traditional:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.05),
+    0 16px 36px -4px rgba(0, 0, 0, 0.08);
+}
+
+.comparison-mobile {
+  background: linear-gradient(180deg, #18191E 0%, #121316 100%);
+  border: 1.5px solid rgba(229, 195, 58, 0.5);
+  color: var(--color-text-main-light);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    0 20px 48px -8px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(229, 195, 58, 0.15),
+    0 0 28px -6px rgba(229, 195, 58, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.comparison-mobile:hover {
+  transform: translateY(-2px);
+  border-color: rgba(229, 195, 58, 0.7);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.35),
+    0 26px 56px -8px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(229, 195, 58, 0.25),
+    0 0 36px -4px rgba(229, 195, 58, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.comparison-badge {
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 5px 13px;
+  border-radius: 9999px;
+  width: fit-content;
+  margin-bottom: 18px;
+}
+
+.comparison-traditional .comparison-badge {
+  background-color: rgba(14, 14, 16, 0.06);
+  border: 1px solid rgba(14, 14, 16, 0.08);
+  color: #555962;
+}
+
+.comparison-mobile .comparison-badge {
+  background-color: var(--color-fleet-yellow);
+  color: var(--color-panel-header);
+  box-shadow: 0 2px 8px rgba(229, 195, 58, 0.35);
+}
+
+.comparison-card-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.018em;
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+.comparison-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 15.5px;
+}
+
+.comparison-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  line-height: 1.5;
+}
+
+.comparison-traditional .comp-icon {
+  color: #8E939E;
+  background-color: rgba(142, 147, 158, 0.12);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 11px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.comparison-mobile .comp-icon {
+  color: #121316;
+  background-color: var(--color-fleet-yellow);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 11px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+  box-shadow: 0 1px 4px rgba(229, 195, 58, 0.4);
+}
+
+@media (max-width: 640px) {
+  .comparison-card {
+    padding: 24px 18px;
+    border-radius: 16px;
+  }
+  .comparison-card-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  .comparison-list {
+    gap: 12px;
+    font-size: 14px;
+  }
+}
+
+/* ==========================================================================
+   ZONE SÉCURITÉ & ORGANES D'USURE (HERO YELLOW // SANS CARDS // APPLE REFINED)
+   ========================================================================== */
+.section-parts-yellow {
+  background-color: #E2BE34;
+  background-image:
+    radial-gradient(ellipse at 85% 20%, rgba(245, 215, 80, 0.4) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(0, 0, 0, 0.05) 100%);
+  border-top: 1px solid rgba(14, 14, 16, 0.14);
+  border-bottom: 1px solid rgba(14, 14, 16, 0.14);
+  padding: 72px 0 84px 0;
+  position: relative;
+  overflow: hidden;
+  color: #0E0E10;
+}
+
+@media (max-width: 640px) {
+  .section-parts-yellow {
+    padding: 44px 0 52px 0;
+  }
+  .parts-yellow-header {
+    margin: 0 auto 30px auto;
+  }
+  .parts-yellow-title {
+    font-size: 26px;
+  }
+}
+
+.parts-yellow-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 44px auto;
+}
+
+.parts-yellow-eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(14, 14, 16, 0.65);
+  margin-bottom: 8px;
+}
+
+.parts-yellow-title {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 800;
+  color: #0E0E10;
+  letter-spacing: -0.025em;
+  line-height: 1.18;
+  margin: 0 0 10px 0;
+}
+
+@media (min-width: 768px) {
+  .parts-yellow-title {
+    font-size: 36px;
+  }
+}
+
+.parts-yellow-lead {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  color: rgba(14, 14, 16, 0.82);
+  line-height: 1.55;
+  margin: 0 auto;
+}
+
+/* Grille Fluide Sans Boîtes / Sans Cards (Apple Seamless Showcase) */
+.parts-seamless-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+}
+
+@media (min-width: 640px) {
+  .parts-seamless-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .parts-seamless-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+}
+
+/* Colonne Sans Card (Zéro bordure de boîte, zéro fond artificiel) */
+.part-seamless-item {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+/* Scène d'image détourée flottant directement sur le jaune */
+.part-seamless-stage {
+  width: 100%;
+  height: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.part-seamless-stage .part-cutout-img {
+  max-width: 100%;
+  max-height: 110px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  /* Ombre de contact naturelle sur surface jaune chaude */
+  filter: drop-shadow(0 12px 20px rgba(14, 14, 16, 0.22));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+  will-change: transform;
+}
+
+.part-seamless-item:hover .part-cutout-img {
+  transform: translateY(-5px) scale(1.05);
+  filter: drop-shadow(0 16px 26px rgba(14, 14, 16, 0.28));
+}
+
+.part-seamless-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+}
+
+.part-seamless-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #0E0E10;
+  margin: 0 0 8px 0;
+  line-height: 1.25;
+}
+
+.part-seamless-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: rgba(14, 14, 16, 0.78);
+  line-height: 1.5;
+  margin: 0 0 12px 0;
+  max-width: 250px;
+}
+
+.part-seamless-spec {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #0E0E10;
+  background-color: rgba(14, 14, 16, 0.08);
+  border: 1px solid rgba(14, 14, 16, 0.16);
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+  letter-spacing: 0.01em;
+}
+
+.part-seamless-action {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Bouton Pill Apple Noir Profond sur Jaune */
+.parts-yellow-btn,
+.part-booking-btn.parts-yellow-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 18px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 700;
+  border-radius: 999px;
+  text-decoration: none;
+  background-color: #0E0E10;
+  color: #FFFFFF;
+  border: 1px solid #0E0E10;
+  box-shadow: 0 3px 10px rgba(14, 14, 16, 0.2);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: -0.01em;
+}
+
+.parts-yellow-btn:hover,
+.part-booking-btn.parts-yellow-btn:hover {
+  background-color: #24252B;
+  border-color: #24252B;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(14, 14, 16, 0.3);
+}
+
+/* ==========================================================================
+   PORSCHE HORIZON PANORAMA : CINEMATIC AUTOMOTIVE CRAFT (SLOW AUTO-GLIDE)
+   ========================================================================== */
+.section-porsche-gallery {
+  position: relative;
+  overflow: hidden;
+  padding: 24px 0 14px 0;
+  background-color: #0A0B0E;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: none;
+}
+
+.porsche-header-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+@media (min-width: 768px) {
+  .porsche-header-row {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+}
+
+.porsche-eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-fleet-yellow);
+  margin-bottom: 8px;
+}
+
+.porsche-header-text .section-title {
+  margin-bottom: 8px;
+  font-size: 32px;
+  letter-spacing: -0.025em;
+}
+
+@media (min-width: 768px) {
+  .porsche-header-text .section-title {
+    font-size: 38px;
+  }
+}
+
+.porsche-header-text .section-subtitle {
+  max-width: 640px;
+  margin: 0;
+  font-size: 15.5px;
+  color: var(--color-text-sub-light);
+  line-height: 1.55;
+}
+
+/* Subtle Quiet Luxury Live Badge */
+.porsche-header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  padding: 6px 14px;
+  border-radius: 999px;
+  user-select: none;
+  align-self: flex-start;
+}
+
+@media (min-width: 768px) {
+  .porsche-header-badge {
+    align-self: flex-end;
+  }
+}
+
+.porsche-live-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-fleet-yellow);
+  box-shadow: 0 0 8px rgba(229, 195, 58, 0.8);
+  display: inline-block;
+  animation: liveBadgePulse 2.5s infinite ease-in-out;
+}
+
+@keyframes liveBadgePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* Curved Horizon Viewport with Dual Cutters */
+.porsche-horizon-viewport {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: #0A0B0E;
+  padding: 8px 0;
+}
+
+/* Top Concave Cutter */
+.porsche-cutter-top {
+  position: absolute;
+  top: 0;
+  left: -8%;
+  right: -8%;
+  height: 36px;
+  background-color: #0A0B0E;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Bottom Concave Cutter */
+.porsche-cutter-bottom {
+  position: absolute;
+  bottom: 0;
+  left: -8%;
+  right: -8%;
+  height: 36px;
+  background-color: #0A0B0E;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .porsche-cutter-top,
+  .porsche-cutter-bottom {
+    height: 42px;
+    left: -5%;
+    right: -5%;
+  }
+}
+
+/* Infinite Marquee Seamless Flow (No Hover Stop, Continuous Slow Mode) */
+.porsche-marquee-wrapper {
+  display: flex;
+  gap: 18px;
+  overflow: hidden;
+  user-select: none;
+  width: 100%;
+  cursor: default;
+}
+
+.porsche-marquee-group {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 100%;
+  animation: porscheSlowGlide 56s linear infinite;
+  will-change: transform;
+  padding: 16px 0;
+}
+
+@keyframes porscheSlowGlide {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(calc(-100% - 18px), 0, 0);
+  }
+}
+
+/* Pure 4K Photo Card (Porsche Tequipment Minimalist) */
+.porsche-photo-card {
+  flex: 0 0 280px;
+  width: 280px;
+  height: 380px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background-color: #121316;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.25),
+    0 18px 44px -6px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 640px) {
+  .porsche-photo-card {
+    flex: 0 0 320px;
+    width: 320px;
+    height: 410px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .porsche-photo-card {
+    flex: 0 0 360px;
+    width: 360px;
+    height: 440px;
+  }
+}
+
+.porsche-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Minimalist Footer Status & CTA */
+.porsche-footer-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .porsche-footer-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.porsche-footer-caption {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--color-text-sub-light);
+  letter-spacing: 0.01em;
+}
+
+.porsche-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 999px;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.porsche-cta-btn:hover {
+  background-color: var(--color-fleet-yellow);
+  color: #0E0E10;
+  border-color: var(--color-fleet-yellow);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(229, 195, 58, 0.38);
+}
+
+
+/* ==========================================================================
+   MARQUES DE PNEUS HOMOLOGUÉES EN SUISSE (COMPACT LINEAR APPLE STANDARD)
+   ========================================================================== */
+.tire-linear-section {
+  background-color: #FFFFFF;
+  border-top: none;
+  border-bottom: none;
+  padding: 38px 0 44px 0;
+}
+
+.tire-linear-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 24px auto;
+}
+
+.tire-linear-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0E0E10;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.25;
+}
+
+@media (min-width: 768px) {
+  .tire-linear-title {
+    font-size: 26px;
+  }
+}
+
+/* Linear Streams (No Cards, Pure Logos) */
+.tire-linear-stream {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.tire-stream-major {
+  gap: 24px 36px;
+  margin-bottom: 22px;
+}
+
+@media (min-width: 1024px) {
+  .tire-stream-major {
+    gap: 16px 44px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+}
+
+.tire-linear-divider {
+  width: 100%;
+  max-width: 760px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08) 20%, rgba(0, 0, 0, 0.08) 80%, transparent);
+  margin: 0 auto 20px auto;
+}
+
+.tire-stream-secondary {
+  gap: 16px 28px;
+}
+
+@media (min-width: 1024px) {
+  .tire-stream-secondary {
+    gap: 12px 30px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+}
+
+.tire-linear-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: default;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  opacity: 0.88;
+}
+
+.tire-linear-item:hover {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+/* Major Brand Logos (Prominent & Bold) */
+.tire-img-major {
+  max-width: 125px;
+  max-height: 38px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+@media (min-width: 768px) {
+  .tire-img-major {
+    max-width: 135px;
+    max-height: 42px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .tire-img-major {
+    max-width: 145px;
+    max-height: 44px;
+  }
+}
+
+/* Secondary Brand Logos (Subtle, Compact & Balanced) */
+.tire-img-secondary {
+  max-width: 95px;
+  max-height: 26px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+@media (min-width: 768px) {
+  .tire-img-secondary {
+    max-width: 105px;
+    max-height: 28px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .tire-img-secondary {
+    max-width: 112px;
+    max-height: 30px;
+  }
+}
+
+/* ==========================================================================
+   TRANSITION: DERRAPADA DE PNEU 100% LARGEUR (PREMIUM TIRE SKID MARK DIVIDER)
+   ========================================================================== */
+.tire-skid-divider {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.tire-skid-top {
+  height: 42px;
+  background-image: url('../public/assets/tire-skid-divider.webp');
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: auto 42px;
+  position: relative;
+  z-index: 10;
+  margin-top: -21px;
+  margin-bottom: -21px;
+  pointer-events: none;
+}
+
+.tire-skid-bottom {
+  height: 48px;
+  background-color: #E2BE34;
+  background-image: 
+    url('../public/assets/tire-skid-divider.webp'),
+    linear-gradient(180deg, #FFFFFF 0%, #FAF6EA 25%, #EED76A 75%, #E2BE34 100%);
+  background-repeat: repeat-x, no-repeat;
+  background-position: center, center;
+  background-size: auto 44px, 100% 100%;
+  border-top: none;
+  border-bottom: none;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   BLOCO DE AGENDAMENTO / CAPTURA INTEGRADA (AMARELO DA HERO CALIBRADO // APPLE LUXURY)
+   ========================================================================== */
+.section-reservation-yellow {
+  background-color: #E2BE34;
+  background-image:
+    radial-gradient(ellipse at 85% 20%, rgba(245, 215, 80, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse at 15% 85%, rgba(195, 155, 25, 0.22) 0%, transparent 55%),
+    linear-gradient(to right, rgba(14, 14, 16, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(14, 14, 16, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+  color: #0E0E10;
+  padding: 68px 0 76px 0;
+  position: relative;
+  overflow: hidden;
+  border-top: none;
+  border-bottom: 1px solid rgba(14, 14, 16, 0.12);
+}
+
+.booking-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 36px;
+  align-items: start;
+}
+
+.booking-hero-grid > * {
+  min-width: 0;
+}
+
+@media (min-width: 980px) {
+  .booking-hero-grid {
+    grid-template-columns: 1fr 1.15fr;
+    gap: 52px;
+  }
+}
+
+/* Coluna Esquerda: Apresentação Operacional */
+.booking-left-visual {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.booking-visual-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #0E0E10;
+  margin-bottom: 14px;
+  text-wrap: balance;
+}
+
+@media (min-width: 768px) {
+  .booking-visual-title {
+    font-size: 38px;
+  }
+}
+
+.booking-visual-lead {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: rgba(14, 14, 16, 0.86);
+  margin-bottom: 22px;
+  text-wrap: pretty;
+}
+
+/* ADS CARD: CINEMA VIDEO STREAMING (APPLE / PORSCHE SPEC) */
+.booking-ad-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(14, 14, 16, 0.14);
+  margin-bottom: 22px;
+  background-color: #0E0E10;
+  box-shadow:
+    0 2px 8px rgba(14, 14, 16, 0.08),
+    0 16px 40px -4px rgba(14, 14, 16, 0.2);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.booking-ad-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 4px 14px rgba(14, 14, 16, 0.12),
+    0 24px 50px -4px rgba(14, 14, 16, 0.26);
+}
+
+.booking-ad-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+  border-radius: 21px;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.booking-ad-card:hover .booking-ad-video {
+  transform: scale(1.025);
+}
+
+.booking-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #0E0E10;
+  margin-bottom: 24px;
+}
+
+.booking-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.booking-check-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #0E0E10;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.booking-call-action {
+  margin-top: 4px;
+}
+
+.btn-booking-call {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 13px 22px;
+  background-color: transparent;
+  border: 1.5px solid #0E0E10;
+  color: #0E0E10;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 700;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-booking-call:hover {
+  background-color: #0E0E10;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(14, 14, 16, 0.25);
+}
+
+/* Coluna Direita: Modal de Devis Flutuante (Senior Figma Elevation) */
+.booking-modal-card {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  padding: 32px 24px;
+  box-shadow:
+    0 2px 4px -1px rgba(14, 14, 16, 0.05),
+    0 8px 16px -2px rgba(14, 14, 16, 0.08),
+    0 20px 40px -6px rgba(14, 14, 16, 0.12),
+    0 40px 80px -12px rgba(14, 14, 16, 0.18);
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .booking-modal-card {
+    padding: 38px 34px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-reservation-yellow {
+    padding: 44px 0 52px 0;
+  }
+  .booking-visual-title {
+    font-size: 26px;
+  }
+  .booking-modal-card {
+    padding: 22px 18px;
+    border-radius: 18px;
+  }
+  .booking-modal-title {
+    font-size: 20px;
+  }
+}
+
+.booking-modal-head {
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #F1F3F5;
+}
+
+.booking-modal-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: #0E0E10;
+  margin-bottom: 5px;
+  line-height: 1.25;
+}
+
+.booking-modal-subtitle {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: #6B7280;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.booking-modal-card .booking-form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+@media (min-width: 600px) {
+  .booking-modal-card .booking-form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.booking-modal-card .booking-form-grid .full-col {
+  grid-column: 1 / -1;
+}
+
+.booking-modal-card .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.booking-modal-card .form-label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  color: #1F2937;
+  letter-spacing: -0.01em;
+}
+
+.booking-modal-card .form-control {
+  height: 46px;
+  background-color: #F8F9FA;
+  border: 1.5px solid #E5E7EB;
+  color: #0E0E10;
+  padding: 0 14px;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: inset 0 1px 2px rgba(14, 14, 16, 0.03);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.booking-modal-card .form-control::placeholder {
+  color: #9CA3AF;
+  font-weight: 400;
+}
+
+.booking-modal-card .form-control:focus-visible {
+  outline: none;
+  background-color: #FFFFFF;
+  border-color: #0E0E10;
+  box-shadow: 0 0 0 3px rgba(14, 14, 16, 0.12), inset 0 1px 2px transparent;
+}
+
+.booking-modal-card .form-control.input-error {
+  border-color: var(--color-error);
+  background-color: #FFF5F5;
+}
+
+.booking-modal-card .form-control.input-error:focus-visible {
+  box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.2);
+}
+
+.field-error-msg {
+  font-size: 12.5px;
+  color: var(--color-error);
+  display: none;
+  margin-top: 2px;
+}
+
+.field-error-msg.visible {
+  display: block;
+}
+
+.booking-modal-card textarea.form-control {
+  height: auto;
+  min-height: 80px;
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+.booking-modal-card .form-privacy {
+  font-size: 12px;
+  color: #6B7280;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.btn-submit-booking {
+  width: 100%;
+  height: 50px;
+  background-color: #0E0E10;
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  border: 1px solid #0E0E10;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(14, 14, 16, 0.22), 0 1px 3px rgba(14, 14, 16, 0.1);
+}
+
+.btn-submit-booking:hover {
+  background-color: #23252B;
+  border-color: #23252B;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(14, 14, 16, 0.32);
+}
+
+.btn-submit-booking:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(14, 14, 16, 0.2);
+}
+
+.section-reservation-yellow .form-status-msg {
+  display: none;
+  font-size: 14.5px;
+  font-weight: 700;
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin-top: 14px;
+}
+
+.section-reservation-yellow .form-status-msg.success {
+  display: block;
+  background-color: rgba(21, 128, 61, 0.12);
+  border: 1px solid rgba(21, 128, 61, 0.35);
+  color: #15803D;
+}
+
+/* ==========================================================================
+   FAQ: QUESTIONS FRÉQUENTES (APPLE / PORSCHE ULTRA-CLEAN ACCORDION)
+   ========================================================================== */
+.faq-section {
+  background-color: var(--color-obsidian, #0E0E10);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 72px 0;
+}
+
+.faq-container {
+  max-width: 840px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.faq-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.faq-item {
+  background-color: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.faq-item:hover {
+  border-color: rgba(229, 195, 58, 0.4);
+  background-color: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.faq-item[open] {
+  border-color: rgba(229, 195, 58, 0.55);
+  background-color: rgba(255, 255, 255, 0.045);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(229, 195, 58, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px;
+  font-family: var(--font-display);
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--color-text-main-light, #FFFFFF);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question::marker {
+  content: "";
+}
+
+.faq-item:hover .faq-question {
+  color: #FFFFFF;
+}
+
+.faq-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-fleet-yellow, #E2BE34);
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.faq-item[open] .faq-icon {
+  transform: rotate(180deg);
+  background-color: rgba(226, 190, 52, 0.15);
+  border-color: rgba(226, 190, 52, 0.4);
+}
+
+.faq-answer {
+  padding: 0 24px 22px 24px;
+  color: var(--color-text-sub-light, #A2A3AD);
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.62;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  padding-top: 16px;
+}
+
+.faq-answer p {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .faq-section {
+    padding: 52px 0;
+  }
+  .faq-question {
+    padding: 18px 18px;
+    font-size: 15px;
+  }
+  .faq-answer {
+    padding: 12px 18px 18px 18px;
+    font-size: 13.5px;
+  }
+  .faq-icon {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* ==========================================================================
+   ZONE 10: SECTEUR D'INTERVENTION AVEC RASTRO DE PNEUS VETORIZADO
+   ========================================================================== */
+#secteur {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-page-bg);
+}
+
+.secteur-track-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.secteur-track-backdrop picture {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.secteur-track-img {
+  width: 100%;
+  max-width: 1550px;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  opacity: 0.32;
+  mix-blend-mode: multiply;
+  filter: contrast(1.15) brightness(0.95);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 20%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0.95) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 20%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0.95) 100%);
+}
+
+.secteur-container {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .secteur-track-img {
+    opacity: 0.25;
+    object-position: center 85%;
+  }
+}
+
+/* ==========================================================================
+   FOOTER (NAP, LINKS, CONFORMITÉ SUISSE - DESIGN ULTRA-REFINADO)
+   ========================================================================== */
+.site-footer {
+  background-color: #111316;
+  color: #8c9099;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 68px 0 28px;
+  font-size: 14.5px;
+}
+
+.footer-grid-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  margin-bottom: 48px;
+  align-items: start;
+}
+
+@media (min-width: 640px) {
+  .footer-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-grid-4 {
+    grid-template-columns: 1.45fr 1fr 1fr 1.25fr;
+    gap: 48px;
+  }
+}
+
+/* Coluna 1: Marca */
+.footer-col-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.footer-brand-shield {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+}
+
+.footer-brand-name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.footer-brand-desc {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #8e939e;
+  margin-bottom: 18px;
+  max-width: 320px;
+  text-wrap: pretty;
+}
+
+.footer-badge-swiss {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #c9cdd6;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  padding: 5px 12px;
+  width: fit-content;
+}
+
+.footer-swiss-flag {
+  font-size: 13px;
+  line-height: 1;
+}
+
+/* Títulos de Colunas */
+.footer-title {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Links de Navegação */
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links a {
+  color: #9ba0aa;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.18s ease, transform 0.18s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--color-fleet-yellow);
+  transform: translateX(3px);
+}
+
+/* Coluna 4: Contact Cards */
+.footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background-color: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 10px 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.footer-contact-card:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(229, 195, 58, 0.45);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.footer-contact-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #8e939e;
+}
+
+.footer-contact-link {
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #e4e7eb;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: color 0.18s ease;
+}
+
+.footer-contact-link.footer-phone-primary {
+  color: var(--color-fleet-yellow);
+}
+
+.footer-contact-link:hover {
+  color: #ffffff;
+}
+
+.footer-location-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: #7a7f8a;
+  padding: 4px 2px 0;
+}
+
+.footer-location-item svg {
+  color: var(--color-fleet-yellow);
+  flex-shrink: 0;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13.5px;
+  color: #8e939e;
+}
+
+.footer-bottom-copy {
+  color: #8e939e;
+}
+
+.footer-bottom-legal {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-legal-sep {
+  color: #4a4f5a;
+  font-size: 10px;
+}
+
+.legal-link-btn {
+  background: none;
+  border: none;
+  color: #8c9099;
+  text-decoration: none;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+  transition: color 0.18s ease;
+}
+
+.legal-link-btn:hover {
+  color: var(--color-fleet-yellow);
+}
+
+.legal-link-btn:focus-visible {
+  outline: 2px solid var(--color-fleet-yellow);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Mobile touch targets ≥ 44px (Apple HIG) */
+@media (max-width: 767px) {
+  .footer-links {
+    gap: 0;
+  }
+  .footer-links a {
+    padding: 10px 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .footer-contact-link {
+    padding: 10px 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .legal-link-btn {
+    padding: 10px 4px;
+    min-height: 44px;
+  }
+}
+
+.modal-dialog {
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-chapa);
+  background-color: var(--color-panel-surface);
+  color: var(--color-text-main-light);
+  max-width: 640px;
+  width: 90%;
+  margin: auto;
+  padding: 32px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.75);
+}
+
+.modal-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(6px);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--color-border-dark);
+  padding-bottom: 12px;
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-fleet-yellow);
+  letter-spacing: -0.015em;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: 1px solid var(--color-border-dark);
+  color: var(--color-text-main-light);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-chapa);
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.modal-close-btn:hover {
+  background-color: var(--color-fleet-yellow);
+  color: var(--color-panel-header);
+  border-color: var(--color-fleet-yellow);
+}
+
+.modal-close-btn:active {
+  transform: scale(0.95);
+}
+
+.modal-close-btn:focus-visible {
+  outline: 2px solid var(--color-fleet-yellow);
+  outline-offset: 2px;
+}
+
+.modal-body {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-sub-light);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-body strong {
+  color: var(--color-text-main-light);
+}
+
+/* ==========================================================================
+   MOBILE ISLAND CALL DOCK (APPLE / LINEAR FLOATING PILL)
+   ========================================================================== */
+.mobile-call-bar {
+  display: flex;
+  position: fixed;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  background-color: rgba(19, 20, 23, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-dock);
+  z-index: 999;
+  padding: 8px;
+  gap: 8px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75);
+}
+
+@media (min-width: 900px) {
+  .mobile-call-bar {
+    display: none;
+  }
+}
+
+.mobile-call-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  background-color: var(--color-fleet-yellow);
+  color: var(--color-panel-header);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  border-radius: var(--radius-chapa);
+  transition: transform 0.1s ease, background-color 0.15s ease;
+}
+
+.mobile-call-btn:active {
+  transform: scale(0.97);
+}
+
+.mobile-call-btn-alt {
+  background-color: var(--color-panel-surface);
+  border: 1px solid var(--color-fleet-yellow);
+  color: var(--color-fleet-yellow);
+}
+
+@media (max-width: 480px) {
+  .mobile-call-bar {
+    bottom: max(10px, env(safe-area-inset-bottom, 10px));
+    left: 10px;
+    right: 10px;
+    padding: 6px;
+    gap: 6px;
+  }
+  .mobile-call-btn {
+    height: 44px;
+    font-size: 15px;
+  }
+}
+
+.card-action-wrap {
+  margin-top: 16px;
+}
+
+/* ==========================================================================
+   ZONE 7.5: GALERIE INTERVENTIONS RÉELLES (TERRAIN GENÈVE)
+   ========================================================================== */
+.gallery-photo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 640px) {
+  .gallery-photo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-photo-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gallery-photo-card {
+  background-color: var(--color-panel-page);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.2),
+    0 12px 28px -6px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-photo-card:hover {
+  border-color: rgba(229, 195, 58, 0.5);
+  transform: translateY(-4px);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.25),
+    0 20px 42px -6px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.gallery-photo-thumb {
+  position: relative;
+  height: 220px;
+  background-color: #0E0E10;
+  overflow: hidden;
+}
+
+.gallery-photo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.92) contrast(1.05);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-photo-thumb img.thumb-pos-top {
+  object-position: center 20%;
+}
+
+.gallery-photo-card:hover .gallery-photo-thumb img {
+  transform: scale(1.06);
+}
+
+.gallery-photo-caption {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+}
+
+.gallery-caption-tag {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--color-fleet-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.gallery-caption-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-text-main-light);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+.gallery-caption-desc {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--color-text-sub-light);
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   PAGE TARIFS & ABONNEMENTS VIP (APPLE / PORSCHE PRECISION CRAFT)
+   ========================================================================== */
+
+/* Hero Tarifs avec Couverture Atelier Mobile Ultra-HD */
+.section-tarifs-hero {
+  position: relative;
+  background-color: #FACD1E;
+  background-image: 
+    linear-gradient(90deg, rgba(250, 205, 30, 0.96) 0%, rgba(250, 205, 30, 0.82) 34%, rgba(250, 205, 30, 0) 50%),
+    url('../public/assets/hero-tarifs-van-hd.png');
+  background-image: 
+    linear-gradient(90deg, rgba(250, 205, 30, 0.96) 0%, rgba(250, 205, 30, 0.82) 34%, rgba(250, 205, 30, 0) 50%),
+    image-set(
+      url('../public/assets/hero-tarifs-van-hd.webp') type('image/webp'),
+      url('../public/assets/hero-tarifs-van-hd.png') type('image/png')
+    );
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 80px 0 70px;
+  border-bottom: 1px solid rgba(14, 14, 16, 0.14);
+  overflow: hidden;
+}
+
+.tarifs-hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.tarifs-hero-content {
+  max-width: 580px;
+  text-align: left;
+}
+
+.tarifs-hero-title {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: -0.028em;
+  color: #0E0E10;
+  margin-bottom: 16px;
+  text-wrap: balance;
+}
+
+@media (min-width: 640px) {
+  .tarifs-hero-title {
+    font-size: 46px;
+    letter-spacing: -0.032em;
+  }
+}
+
+.tarifs-hero-title .hero-title-city {
+  display: inline;
+  color: #0E0E10;
+  opacity: 0.92;
+  font-weight: 800;
+}
+
+.tarifs-hero-lead {
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.6;
+  letter-spacing: -0.008em;
+  color: rgba(14, 14, 16, 0.86);
+  font-weight: 500;
+  margin-bottom: 30px;
+  text-wrap: pretty;
+}
+
+/* Switcher Háptico Segmented Control (Apple HIG) */
+.pricing-switcher-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 8px;
+}
+
+.pricing-switcher {
+  display: inline-flex;
+  background-color: #131417;
+  padding: 5px;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.pricing-tab-btn {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: #9BA0AA;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: -0.01em;
+}
+
+.pricing-tab-btn:hover {
+  color: #ffffff;
+}
+
+.pricing-tab-btn.active {
+  background-color: var(--color-fleet-yellow);
+  color: var(--color-panel-header);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile banner stage */
+.tarifs-hero-cover-mobile {
+  display: none;
+}
+
+@media (max-width: 959px) {
+  .section-tarifs-hero {
+    background-image: none;
+    padding: 50px 0 40px;
+  }
+
+  .tarifs-hero-content {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .tarifs-hero-title {
+    font-size: 34px;
+  }
+
+  .pricing-switcher-wrapper {
+    justify-content: center;
+  }
+
+  .tarifs-hero-cover-mobile {
+    display: block;
+    margin-top: 28px;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(14, 14, 16, 0.2);
+    border: 1px solid rgba(14, 14, 16, 0.12);
+  }
+
+  .tarifs-hero-cover-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+}
+
+.pricing-tab-btn:focus-visible {
+  outline: 2px solid var(--color-fleet-yellow);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .pricing-switcher {
+    padding: 3px;
+  }
+  .pricing-tab-btn {
+    font-size: 12.5px;
+    padding: 8px 14px;
+  }
+}
+
+/* Tab Panels */
+.tarifs-panel {
+  display: none;
+}
+
+.tarifs-panel.active {
+  display: block;
+  animation: fadeInPanel 0.25s ease-out;
+}
+
+@keyframes fadeInPanel {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Grid de Cards VIP */
+.pricing-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+@media (min-width: 860px) {
+  .pricing-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+  }
+}
+
+.vip-pricing-card {
+  background: linear-gradient(180deg, #18191E 0%, #121316 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 36px 30px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.25),
+    0 16px 40px -8px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.vip-pricing-card:hover {
+  border-color: rgba(229, 195, 58, 0.4);
+  transform: translateY(-4px);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.3),
+    0 24px 54px -8px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.vip-pricing-card.featured {
+  background: linear-gradient(180deg, #1C1D24 0%, #141519 100%);
+  border: 1.5px solid var(--color-fleet-yellow);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.35),
+    0 24px 56px -8px rgba(0, 0, 0, 0.65),
+    0 0 36px -4px rgba(229, 195, 58, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.vip-pricing-card.featured:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.4),
+    0 30px 64px -8px rgba(0, 0, 0, 0.7),
+    0 0 44px -4px rgba(229, 195, 58, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.vip-card-badge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-fleet-yellow);
+  color: var(--color-panel-header);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.vip-card-tier {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-fleet-yellow);
+  margin-bottom: 6px;
+}
+
+.vip-card-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-text-main-light);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.vip-card-price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.vip-card-price {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.vip-card-currency {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-fleet-yellow);
+}
+
+.vip-card-period {
+  font-size: 14px;
+  color: var(--color-text-sub-light);
+}
+
+.vip-card-desc {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--color-text-sub-light);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.vip-card-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex-grow: 1;
+  padding: 0;
+}
+
+.vip-card-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: #d1d5db;
+}
+
+.vip-feature-check {
+  color: var(--color-fleet-yellow);
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.vip-card-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
+  border-radius: var(--radius-chapa);
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.18s ease;
+  letter-spacing: -0.01em;
+  cursor: pointer !important;
+  user-select: none;
+}
+
+.vip-card-btn-primary {
+  background-color: var(--color-fleet-yellow);
+  color: var(--color-panel-header);
+}
+
+.vip-card-btn-primary:hover {
+  background-color: var(--color-fleet-yellow-hover);
+  transform: translateY(-1px);
+}
+
+.vip-card-btn-secondary {
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.vip-card-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-fleet-yellow);
+}
+
+@media (max-width: 640px) {
+  .pricing-cards-grid {
+    gap: 18px;
+    margin-top: 24px;
+  }
+  .vip-pricing-card {
+    padding: 24px 18px;
+    border-radius: 16px;
+  }
+  .vip-card-title {
+    font-size: 21px;
+    margin-bottom: 8px;
+  }
+  .vip-card-price {
+    font-size: 38px;
+  }
+  .vip-card-desc {
+    font-size: 13px;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+  }
+  .vip-card-features {
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .vip-card-features li {
+    font-size: 13px;
+  }
+  .vip-card-btn {
+    height: 44px;
+    font-size: 14px;
+  }
+}
+
+/* Tabelas de Tarifs À la Carte (Porsche Engineering Style) */
+.ala-carte-tables {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  margin-top: 40px;
+}
+
+.spec-pricing-card {
+  background-color: var(--color-panel-surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 16px 40px -8px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.spec-pricing-header {
+  padding: 20px 24px;
+  background-color: #1a1b20;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.spec-header-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.spec-header-icon {
+  color: var(--color-fleet-yellow);
+}
+
+.spec-header-included {
+  font-size: 12px;
+  color: var(--color-fleet-yellow);
+  background-color: rgba(229, 195, 58, 0.08);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-weight: 600;
+}
+
+.spec-table-info {
+  padding: 12px 24px;
+  font-size: 12.5px;
+  color: #8c9099;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.spec-pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.spec-pricing-table tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 0.15s ease;
+}
+
+.spec-pricing-table tr:last-child {
+  border-bottom: none;
+}
+
+.spec-pricing-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.spec-pricing-table td {
+  padding: 16px 24px;
+  font-size: 14.5px;
+}
+
+.spec-item-title {
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.spec-item-subtitle {
+  font-size: 12.5px;
+  color: #8c9099;
+  margin-top: 3px;
+}
+
+.spec-item-price {
+  text-align: right;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--color-fleet-yellow);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.spec-price-detail {
+  font-size: 12px;
+  font-weight: normal;
+  color: #8c9099;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .spec-pricing-header {
+    padding: 14px 16px;
+  }
+  .spec-table-info {
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+  .spec-pricing-table td {
+    padding: 12px 14px;
+    font-size: 13.5px;
+  }
+  .spec-item-price {
+    font-size: 15px;
+  }
+}
+
+/* Bloco ROI Comparador */
+.roi-banner-card {
+  background: linear-gradient(135deg, #17181c 0%, #1e2026 100%);
+  border: 1px solid rgba(229, 195, 58, 0.25);
+  border-radius: 20px;
+  padding: 36px 32px;
+  margin: 50px 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.25),
+    0 20px 48px -8px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+@media (min-width: 860px) {
+  .roi-banner-card {
+    grid-template-columns: 1.4fr 1fr;
+    align-items: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .roi-banner-card {
+    padding: 22px 18px;
+    margin: 28px 0;
+    border-radius: 16px;
+    gap: 16px;
+  }
+  .roi-banner-title {
+    font-size: 19px;
+  }
+  .roi-banner-desc {
+    font-size: 13.5px;
+  }
+}
+
+.roi-banner-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: -0.015em;
+}
+
+.roi-banner-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #9ba0aa;
+}
+
+.roi-stat-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 22px;
+  text-align: center;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.roi-stat-num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--color-fleet-yellow);
+  font-variant-numeric: tabular-nums;
+}
+
+.roi-stat-label {
+  font-size: 12.5px;
+  color: #8c9099;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   MODAL ADHÉSION CLUB PRIVILÈGE & TWINT (APPLE CLEAN SHEET DESIGN)
+   ========================================================================== */
+.modal-dialog.vip-modal {
+  max-width: 490px;
+  width: 92%;
+  max-height: 90vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 22px 24px 20px;
+  background-color: #121316;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.88), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+}
+
+.vip-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.vip-modal-title-lockup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.vip-apple-kicker {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--color-fleet-yellow);
+}
+
+.vip-apple-title {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.vip-close-btn {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  cursor: pointer !important;
+  transition: all 0.15s ease;
+}
+
+.vip-close-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #FFFFFF;
+}
+
+/* Sélecteur de formules discret */
+.vip-plan-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 3px;
+  border-radius: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  margin-bottom: 9px;
+}
+
+.vip-plan-option {
+  position: relative;
+  cursor: pointer !important;
+  user-select: none;
+}
+
+.vip-plan-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.vip-plan-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 32px;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer !important;
+  transition: all 0.16s ease;
+}
+
+.vip-plan-pill-name {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.vip-plan-pill-price {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  font-variant-numeric: tabular-nums;
+}
+
+.vip-plan-option input[type="radio"]:checked + .vip-plan-pill {
+  background-color: var(--color-fleet-yellow);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.vip-plan-option input[type="radio"]:checked + .vip-plan-pill .vip-plan-pill-name,
+.vip-plan-option input[type="radio"]:checked + .vip-plan-pill .vip-plan-pill-price {
+  color: #0E0E10;
+  font-weight: 700;
+}
+
+/* Résumé 1 ligne des avantages */
+.vip-perks-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(250, 205, 30, 0.05);
+  border: 1px solid rgba(250, 205, 30, 0.18);
+  border-radius: 8px;
+  padding: 6px 10px;
+  margin-bottom: 11px;
+}
+
+.vip-perks-badge {
+  background-color: var(--color-fleet-yellow);
+  color: #0E0E10;
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: 1px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.vip-perks-text {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.3;
+}
+
+/* Grille du formulaire compact */
+.vip-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px 10px;
+  margin-bottom: 10px;
+}
+
+.vip-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.vip-full-width {
+  grid-column: 1 / -1;
+}
+
+.vip-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.72);
+  letter-spacing: -0.01em;
+}
+
+.vip-req {
+  color: var(--color-fleet-yellow);
+}
+
+.vip-hint {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.38);
+  font-weight: 400;
+}
+
+.vip-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.04);
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.vip-input:focus {
+  outline: none;
+  border-color: var(--color-fleet-yellow);
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+.vip-input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* TWINT Payment Card (Compact Luxury) */
+.vip-twint-card {
+  background: rgba(0, 193, 106, 0.05);
+  border: 1px solid rgba(0, 193, 106, 0.25);
+  border-radius: 11px;
+  padding: 8px 12px;
+  margin-bottom: 11px;
+}
+
+.vip-twint-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.vip-twint-identity {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.vip-twint-badge {
+  background-color: #00C16A;
+  color: #0E0E10;
+  font-family: var(--font-display);
+  font-size: 9.5px;
+  font-weight: 900;
+  padding: 1px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+.vip-twint-number {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 800;
+  color: #00C16A;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.vip-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 7px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer !important;
+  transition: all 0.15s ease;
+}
+
+.vip-copy-btn:hover {
+  background: #00C16A;
+  color: #0E0E10;
+  border-color: #00C16A;
+}
+
+.vip-twint-price-val {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--color-fleet-yellow);
+  font-variant-numeric: tabular-nums;
+}
+
+.vip-twint-ref-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.vip-twint-code {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--color-fleet-yellow);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+/* Actions Cluster */
+.vip-actions-cluster {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 7px;
+}
+
+.vip-submit-btn {
+  width: 100%;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer !important;
+  transition: all 0.16s ease;
+}
+
+.vip-submit-btn:hover {
+  background-color: var(--color-fleet-yellow-hover);
+  transform: translateY(-1px);
+}
+
+.vip-wa-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: #25D366;
+  text-decoration: none;
+  cursor: pointer !important;
+  padding: 4px 0;
+  transition: opacity 0.15s ease;
+}
+
+.vip-wa-link:hover {
+  opacity: 0.85;
+  text-decoration: underline;
+}
+
+.vip-wa-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #25D366;
+}
+
+.vip-form-disclaimer {
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+}
+
+/* Vue Succès */
+.vip-success-view {
+  text-align: center;
+  padding: 14px 6px;
+}
+
+.vip-success-view.is-hidden {
+  display: none !important;
+}
+
+.vip-form.is-hidden {
+  display: none !important;
+}
+
+.vip-success-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #00C16A, #008744);
+  color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 900;
+  margin: 0 auto 10px;
+  box-shadow: 0 6px 18px rgba(0, 193, 106, 0.35);
+}
+
+.vip-success-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.vip-success-lead {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 14px;
+}
+
+.vip-dossier-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vip-dossier-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.vip-dossier-row strong {
+  color: #FFFFFF;
+}
+
+.vip-success-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.vip-success-actions a,
+.vip-success-actions button {
+  cursor: pointer !important;
+}
+
+@media (max-width: 640px) {
+  .modal-dialog.vip-modal {
+    padding: 18px 16px 18px;
+    width: 94%;
+    border-radius: 16px;
+  }
+  .vip-form-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .vip-success-actions {
+    flex-direction: column;
+  }
+}
+
+/* ==========================================================================
+   ACESSIBILIDADE: PREFERS-REDUCED-MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

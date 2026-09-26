@@ -1,0 +1,85 @@
+/**
+ * L.A Pneus — Design Tokens (Auditoria UI travada)
+ * Rigor técnico: escala de 8, 1 hex por papel, radius 4px, zero sombra.
+ */
+
+:root {
+  /* --- PALETTE TRAVADA (UI-AUDIT & APPLE REFINEMENT) --- */
+  --color-fleet-yellow: #E5C33A;       /* Amarelo frota calibrado / acetinado suave */
+  --color-fleet-yellow-hover: #D4B22B; /* Amarelo hover */
+  --color-fleet-yellow-subtle: rgba(229, 195, 58, 0.08);
+  --color-fleet-yellow-border: rgba(229, 195, 58, 0.22);
+  
+  --color-panel-header: #131417;       /* Preto header */
+  --color-panel-page: #0E0E10;         /* Preto página (seções escuras) */
+  --color-panel-surface: #17181C;      /* Superfície escura */
+  --color-panel-input: #111111;        /* Fundo de campos */
+  
+  --color-cream-page: #F3F1EA;         /* Creme página */
+  --color-white-card: #FFFFFF;         /* Branco card */
+  
+  --color-text-main-dark: #1D1D1F;     /* Texto principal no creme (Apple graphite) */
+  --color-text-sub-dark: #5A5E68;      /* Texto secundário no creme */
+  
+  --color-text-main-light: #F5F5F7;    /* Texto principal no escuro (Apple soft white) */
+  --color-text-sub-light: #A6ABB6;     /* Texto secundário no escuro (Apple warm silver) */
+  
+  --color-border-dark: #2C303A;        /* Linha no escuro */
+  --color-border-light: #DDD9CE;       /* Linha no creme */
+  --color-border-input: #333333;       /* Linha default campos */
+  --color-error: #D32F2F;              /* Borda de erro de validação */
+
+  /* --- TYPE RAMP --- */
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-brand: 'Barlow Condensed', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+
+  /* Tamanhos / Line-Heights / Pesos */
+  --type-display-size: 48px;
+  --type-display-lh: 1.05;
+  --type-display-weight: 800;
+  
+  --type-title-size: 32px;
+  --type-title-lh: 1.15;
+  --type-title-weight: 800;
+
+  --type-body-size: 18px;
+  --type-body-lh: 1.5;
+  --type-body-weight: 400;
+
+  --type-body-sm-size: 15px;
+  --type-body-sm-lh: 1.45;
+
+  --type-label-size: 13px;
+  --type-label-weight: 700;
+
+  --type-button-size: 18px;
+  --type-button-weight: 700;
+
+  --type-phone-size: 26px;
+  --type-phone-weight: 800;
+
+  /* --- ESCALA DE 8 --- */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-96: 96px;
+
+  /* Layout */
+  --content-width: 1120px;
+  --gutter-mobile: 24px;
+  --gutter-desktop: 32px;
+
+  /* Elementos */
+  --radius-chapa: 4px;
+  --height-topbar: 36px;
+  --height-header: 64px;
+  --height-button: 48px;
+  --height-input: 48px;
+  --height-phone-touch: 56px;
+}

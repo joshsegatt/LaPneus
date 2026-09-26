@@ -1,0 +1,19 @@
+{
+  "name": "la-pneus-frontend",
+  "version": "1.0.0",
+  "description": "L.A Pneus - Atelier mobile Genève et Vaud",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node scripts/build.js",
+    "test": "node tests/check_preview.js"
+  },
+  "keywords": [
+    "pneus",
+    "freins",
+    "geneve",
+    "vaud"
+  ],
+  "author": "L.A Pneus",
+  "license": "ISC"
+}

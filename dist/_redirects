@@ -1,0 +1,5 @@
+# Redirections Netlify L.A Pneus
+/preview/index.html   /   301!
+/preview              /   301!
+/preview/tarifs.html  /tarifs   301!
+/tarifs               /tarifs.html   200

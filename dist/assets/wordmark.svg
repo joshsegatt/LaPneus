@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 120" width="100%" height="100%">
+  <defs>
+    <linearGradient id="wordmarkGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF275"/>
+      <stop offset="25%" stop-color="#F5C400"/>
+      <stop offset="100%" stop-color="#DDA000"/>
+    </linearGradient>
+    <filter id="textDrop" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+  <!-- L.A PNEUS wordmark with flared glyph styling -->
+  <g filter="url(#textDrop)">
+    <text x="10" y="88" 
+          font-family="'Barlow Condensed', 'Cinzel Decorative', 'Copperplate', Impact, sans-serif" 
+          font-size="94" 
+          font-weight="900" 
+          letter-spacing="2"
+          fill="url(#wordmarkGrad)">L.A Pneus</text>
+  </g>
+</svg>

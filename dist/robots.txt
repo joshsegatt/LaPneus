@@ -1,0 +1,6 @@
+# Robots.txt pour L.A Pneus Atelier Mobile (Genève & Vaud)
+User-agent: *
+Allow: /
+
+# Sitemap officiel
+Sitemap: https://lapneus.ch/sitemap.xml
