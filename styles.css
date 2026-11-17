@@ -4761,3 +4761,6 @@ h3,
 }
 
 .form-status-msg.pending a { color: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Tarifs: a foto do hero vai de ponta a ponta (tira canto e borda herdados) */
+.tarifs-hero-cover-mobile { border: 0; border-radius: 0; }

@@ -12,6 +12,7 @@
       "permanent": true
     },
     { "source": "/preview", "destination": "/", "permanent": true },
+    { "source": "/preview/", "destination": "/", "permanent": true },
     { "source": "/preview/index.html", "destination": "/", "permanent": true },
     { "source": "/preview/tarifs", "destination": "/tarifs", "permanent": true },
     { "source": "/preview/tarifs.html", "destination": "/tarifs", "permanent": true },
