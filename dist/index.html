@@ -993,13 +993,23 @@
         };
 
         successMsg.classList.remove('success', 'error');
+        // FormSubmit répond souvent en 30 à 70 s : on prévient le client au lieu de le laisser deviner
+        const slowNotice = setTimeout(() => {
+          if (submitBtn) submitBtn.textContent = 'Envoi en cours (jusqu’à 1 min)...';
+          successMsg.textContent = 'Le service d’envoi peut prendre jusqu’à une minute. Ne fermez pas la page, ou appelez-nous au ';
+          const slowCall = document.createElement('a');
+          slowCall.href = 'tel:+41786054301';
+          slowCall.textContent = '078 605 43 01';
+          successMsg.append(slowCall, '.');
+          successMsg.classList.add('pending');
+        }, 6000);
 
         // Succès seulement si FormSubmit confirme ; sinon le formulaire est conservé
         let sent = false;
         try {
           const res = await fetch(DEVIS_EMAIL_ENDPOINT, {
             method: 'POST',
-            signal: AbortSignal.timeout(20000),
+            signal: AbortSignal.timeout(90000),
             headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json'
@@ -1013,6 +1023,8 @@
           console.warn('Devis non transmis (réseau) :', netErr);
         }
 
+        clearTimeout(slowNotice);
+        successMsg.classList.remove('pending');
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.textContent = originalBtnText;

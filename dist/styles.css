@@ -4751,3 +4751,13 @@ h3,
 }
 
 .vip-success-view .vip-twint-card { margin: 16px 0; }
+
+/* Orçamento: envio lento do FormSubmit (aviso neutro) */
+.section-reservation-yellow .form-status-msg.pending {
+  display: block;
+  background-color: rgba(19, 20, 23, 0.05);
+  border: 1px solid rgba(19, 20, 23, 0.18);
+  color: #1D1D1F;
+}
+
+.form-status-msg.pending a { color: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
