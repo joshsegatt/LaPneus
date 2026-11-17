@@ -122,20 +122,22 @@ function doPost(e) {
     }
 
     const timestamp = Utilities.formatDate(new Date(), 'Europe/Zurich', 'dd.MM.yyyy HH:mm');
-    const dossierId = data.dossierId || ('LAP-' + Utilities.formatDate(new Date(), 'Europe/Zurich', 'yyyyMMdd-HHmm'));
+    const dossierId = /^LAP-d{4}-d{4}$/.test(String(data.dossierId || '')) ? String(data.dossierId) : ('LAP-' + Utilities.formatDate(new Date(), 'Europe/Zurich', 'yyyyMMdd-HHmm'));
     const statut = '🟡 EN ATTENTE'; // Passe à 🟢 ACTIF dès confirmation du premier TWINT
-    const formule = data.formule || 'Member Gold';
-    const prix = data.prix || '19 CHF / mois';
-    const nom = data.nom || '';
-    const tel = data.telephone || '';
-    const email = data.email || '';
-    const commune = data.commune || '';
-    const vehicule = data.vehicule || '';
-    const plaque = (data.plaque || '').toUpperCase();
-    const pneus = data.pneus || '';
+    // Formule et prix viennent de la table du script, jamais du navigateur
+    const plan = resolvePlan(data);
+    const formule = plan.formule;
+    const prix = plan.prix;
+    const nom = cleanCell(data.nom, 80);
+    const tel = cleanCell(data.telephone, 30);
+    const email = cleanCell(data.email, 120);
+    const commune = cleanCell(data.commune, 80);
+    const vehicule = cleanCell(data.vehicule, 120);
+    const plaque = cleanCell(String(data.plaque || '').toUpperCase(), 20);
+    const pneus = cleanCell(data.pneus, 80);
     const twintLigne = TWINT_LINE;
     const dernierPaiement = 'En attente 1er TWINT';
-    const notes = data.notes || 'Inscription web en temps réel';
+    const notes = 'Inscription web en temps réel';
 
     // Insérer la nouvelle ligne
     sheet.appendRow([
@@ -173,15 +175,15 @@ function doPost(e) {
               <p style="font-size: 15px; margin-top: 0;">Une nouvelle adhésion a été enregistrée en temps réel sur votre Google Sheet :</p>
               
               <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 20px;">
-                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Nº Dossier :</strong></td><td style="padding: 8px 0; font-weight: bold; border-bottom: 1px solid #eee;">${dossierId}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Formule :</strong></td><td style="padding: 8px 0; font-weight: bold; color: #000; border-bottom: 1px solid #eee;">${formule} (${prix})</td></tr>
-                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Client :</strong></td><td style="padding: 8px 0; font-weight: bold; border-bottom: 1px solid #eee;">${nom}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Téléphone :</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><a href="tel:${tel}" style="color: #0066cc; font-weight: bold;">${tel}</a></td></tr>
-                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>E-mail :</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${email || '-'}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Commune :</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${commune}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Véhicule :</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${vehicule}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Plaque :</strong></td><td style="padding: 8px 0; font-weight: bold; color: #b8860b; border-bottom: 1px solid #eee;">${plaque}</td></tr>
-                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Pneus :</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${pneus || 'À préciser'}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Nº Dossier :</strong></td><td style="padding: 8px 0; font-weight: bold; border-bottom: 1px solid #eee;">${esc(dossierId)}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Formule :</strong></td><td style="padding: 8px 0; font-weight: bold; color: #000; border-bottom: 1px solid #eee;">${esc(formule)} (${esc(prix)})</td></tr>
+                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Client :</strong></td><td style="padding: 8px 0; font-weight: bold; border-bottom: 1px solid #eee;">${esc(nom)}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Téléphone :</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><a href="tel:${esc(tel.replace(/[^\d+]/g, ''))}" style="color: #0066cc; font-weight: bold;">${esc(tel)}</a></td></tr>
+                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>E-mail :</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${esc(email) || '-'}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Commune :</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${esc(commune)}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Véhicule :</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${esc(vehicule)}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Plaque :</strong></td><td style="padding: 8px 0; font-weight: bold; color: #b8860b; border-bottom: 1px solid #eee;">${esc(plaque)}</td></tr>
+                <tr><td style="padding: 8px 0; color: #666; border-bottom: 1px solid #eee;"><strong>Pneus :</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${esc(pneus) || 'À préciser'}</td></tr>
                 <tr><td style="padding: 8px 0; color: #666;"><strong>Ligne TWINT :</strong></td><td style="padding: 8px 0; font-weight: bold; color: #008744;">${TWINT_LINE}</td></tr>
               </table>
 
@@ -221,6 +223,45 @@ function doPost(e) {
  */
 function doGet(e) {
   return ContentService
-    .createTextOutput('L.A PNEUS Webhook Google Sheets opérationnel pour segatt22@gmail.com.')
+    .createTextOutput('L.A PNEUS Webhook Google Sheets opérationnel.')
     .setMimeType(ContentService.MimeType.TEXT);
+}
+
+
+/**
+ * Formules officielles. Le site envoie seulement le choix (tier) ; prix et nom viennent d'ici.
+ */
+const PLANS = {
+  silver: { formule: 'Member Silver', prix: '9 CHF / mois' },
+  gold: { formule: 'Member Gold', prix: '19 CHF / mois' },
+  platinum: { formule: 'Member Platinum', prix: '29 CHF / mois' }
+};
+
+function resolvePlan(data) {
+  const tier = String(data.tier || '').toLowerCase();
+  if (PLANS[tier]) return PLANS[tier];
+  // Compatibilité avec l'ancienne version du site, qui envoyait seulement le nom de la formule
+  const byName = Object.keys(PLANS).filter(function (k) { return PLANS[k].formule === data.formule; })[0];
+  return PLANS[byName] || PLANS.gold;
+}
+
+/**
+ * Texte sûr pour une cellule : longueur limitée et jamais interprété comme formule.
+ */
+function cleanCell(value, maxLength) {
+  let text = String(value == null ? '' : value).replace(/[\u0000-\u001F]/g, ' ').trim().slice(0, maxLength);
+  if (/^[=+\-@]/.test(text)) text = "'" + text;
+  return text;
+}
+
+/**
+ * Échappe le HTML pour l'e-mail de notification.
+ */
+function esc(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
