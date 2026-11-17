@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap officiel
-Sitemap: https://lapneus.ch/sitemap.xml
+Sitemap: https://www.lapneus.ch/sitemap.xml

@@ -3,5 +3,37 @@
   "framework": null,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "lapneus.vercel.app" }],
+      "destination": "https://www.lapneus.ch/:path*",
+      "permanent": true
+    },
+    { "source": "/preview", "destination": "/", "permanent": true },
+    { "source": "/preview/index.html", "destination": "/", "permanent": true },
+    { "source": "/preview/tarifs", "destination": "/tarifs", "permanent": true },
+    { "source": "/preview/tarifs.html", "destination": "/tarifs", "permanent": true },
+    { "source": "/preview/:path*", "destination": "/:path*", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" }]
+    },
+    {
+      "source": "/public/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" }]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+      ]
+    }
+  ]
 }
