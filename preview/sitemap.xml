@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://lapneus.ch/</loc>
+    <loc>https://www.lapneus.ch/</loc>
     <lastmod>2026-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://lapneus.ch/"/>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.lapneus.ch/"/>
   </url>
   <url>
-    <loc>https://lapneus.ch/tarifs.html</loc>
+    <loc>https://www.lapneus.ch/tarifs</loc>
     <lastmod>2026-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://lapneus.ch/tarifs.html"/>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.lapneus.ch/tarifs"/>
   </url>
 </urlset>

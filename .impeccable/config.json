@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "preview/*.html"
+        ],
+        "createdAt": "2026-11-17T19:12:56.770Z",
+        "reason": "Brief: UI-AUDIT.md e SCOPE.md fixam fundo papel off-white (#F3F1EA) como token do projeto"
+      }
+    ]
+  }
+}
