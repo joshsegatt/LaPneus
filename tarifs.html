@@ -154,7 +154,7 @@
         <!-- BANNER DE COUVERTURE MOBILE ULTRA-HD -->
         <figure class="tarifs-hero-cover-mobile">
           <picture>
-            <img src="../public/assets/atelier-mobile-equipement.jpg" alt="Technicien au démonte-pneu à bord de la camionnette atelier L.A Pneus, porte latérale ouverte" class="tarifs-hero-cover-img" width="1202" height="1600" fetchpriority="high">
+            <img src="../public/assets/atelier-mobile-equipement.jpg" srcset="../public/assets/atelier-mobile-equipement-800.webp 800w, ../public/assets/atelier-mobile-equipement.jpg 1202w" sizes="(min-width: 1024px) 50vw, 100vw" alt="Technicien au démonte-pneu à bord de la camionnette atelier L.A Pneus, porte latérale ouverte" class="tarifs-hero-cover-img" width="1202" height="1600" fetchpriority="high">
           </picture>
         </figure>
       </div>
@@ -971,6 +971,7 @@
     };
 
     let currentTier = 'gold';
+    let pendingDossierId = null;
     const vipPerksText = document.getElementById('vipPerksText');
     const btnSubmitAdhesion = document.getElementById('btnSubmitAdhesion');
     const adhesionTitle = document.getElementById('adhesionVipTitle');
@@ -1086,8 +1087,13 @@
         }
 
         const plan = PLAN_CONFIG[currentTier] || PLAN_CONFIG.gold;
-        const randomNum = Math.floor(1000 + Math.random() * 9000);
-        const dossierId = `LAP-${new Date().getFullYear()}-${randomNum}`;
+        // Un seul numéro de dossier par tentative d'adhésion : un nouvel essai après coupure
+        // renvoie le même, et le script l'ignore s'il est déjà enregistré.
+        if (!pendingDossierId) {
+          const rand = Array.from(crypto.getRandomValues(new Uint8Array(6)), b => '0123456789ABCDEFGHJKLMNPQRSTUVWXYZ'[b % 34]).join('');
+          pendingDossierId = `LAP-${new Date().getFullYear()}-${rand}`;
+        }
+        const dossierId = pendingDossierId;
 
         const payload = {
           dossierId: dossierId,
@@ -1141,6 +1147,8 @@
           }
           return;
         }
+
+        pendingDossierId = null;
 
         // Mise à jour de la vue de succès (référence TWINT recalculée avec la plaque saisie)
         updatePlanUI(currentTier);

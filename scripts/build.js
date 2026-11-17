@@ -78,7 +78,12 @@ for (const pageName of pagesToCheck) {
   let match;
 
   while ((match = assetRegex.exec(htmlContent)) !== null) {
-    let ref = match[1].split('?')[0].split('#')[0].trim();
+    // srcset peut lister plusieurs images : "a.webp 800w, b.jpg 1202w"
+    const candidates = match[0].startsWith('srcset')
+      ? match[1].split(',').map(c => c.trim().split(/\s+/)[0])
+      : [match[1]];
+    for (const candidate of candidates) {
+    let ref = candidate.split('?')[0].split('#')[0].trim();
     if (ref.startsWith('http') || ref.startsWith('tel:') || ref.startsWith('mailto:') || ref.startsWith('#') || ref === '' || (ref.startsWith('/') && !path.extname(ref))) {
       continue;
     }
@@ -95,6 +100,7 @@ for (const pageName of pagesToCheck) {
         totalMissingCount++;
         continue;
       }
+    }
     }
   }
 }

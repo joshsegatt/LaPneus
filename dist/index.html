@@ -264,7 +264,7 @@
       </div>
 
       <figure class="hero-tires-stage">
-        <img src="../public/assets/mecanicien-montage-pneu.jpg" alt="Technicien L.A Pneus montant un pneu sur la démonte-pneu, à bord de la camionnette atelier" class="hero-stage-img" width="1202" height="1600" fetchpriority="high">
+        <img src="../public/assets/mecanicien-montage-pneu.jpg" srcset="../public/assets/mecanicien-montage-pneu-800.webp 800w, ../public/assets/mecanicien-montage-pneu.jpg 1202w" sizes="(min-width: 1024px) 50vw, 100vw" alt="Technicien L.A Pneus montant un pneu sur la démonte-pneu, à bord de la camionnette atelier" class="hero-stage-img" width="1202" height="1600" fetchpriority="high">
         <figcaption class="hero-stage-caption">À bord de la camionnette atelier</figcaption>
       </figure>
     </div>
@@ -999,6 +999,7 @@
         try {
           const res = await fetch(DEVIS_EMAIL_ENDPOINT, {
             method: 'POST',
+            signal: AbortSignal.timeout(20000),
             headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json'
@@ -1061,6 +1062,5 @@
 
   </script>
   <script src="component-explorer.js"></script>
-  <script src="horizon-slider.js"></script>
 </body>
 </html>

@@ -122,7 +122,7 @@ function doPost(e) {
     }
 
     const timestamp = Utilities.formatDate(new Date(), 'Europe/Zurich', 'dd.MM.yyyy HH:mm');
-    const dossierId = /^LAP-d{4}-d{4}$/.test(String(data.dossierId || '')) ? String(data.dossierId) : ('LAP-' + Utilities.formatDate(new Date(), 'Europe/Zurich', 'yyyyMMdd-HHmm'));
+    const dossierId = /^LAP-\d{4}-[A-Z0-9]{4,8}$/.test(String(data.dossierId || '')) ? String(data.dossierId) : ('LAP-' + Utilities.formatDate(new Date(), 'Europe/Zurich', 'yyyyMMdd-HHmm'));
     const statut = '🟡 EN ATTENTE'; // Passe à 🟢 ACTIF dès confirmation du premier TWINT
     // Formule et prix viennent de la table du script, jamais du navigateur
     const plan = resolvePlan(data);
@@ -138,6 +138,18 @@ function doPost(e) {
     const twintLigne = TWINT_LINE;
     const dernierPaiement = 'En attente 1er TWINT';
     const notes = 'Inscription web en temps réel';
+
+    // Renvoi du même dossier (réseau coupé puis nouvel essai) : pas de doublon
+    if (sheet.getLastRow() > 1) {
+      // colonnes B (dossier) à K (plaque) : doublon seulement si dossier ET plaque identiques
+      const rows = sheet.getRange(2, 2, sheet.getLastRow() - 1, 10).getValues();
+      const isDuplicate = rows.some(function (r) { return String(r[0]) === dossierId && String(r[9]) === plaque; });
+      if (isDuplicate) {
+        return ContentService
+          .createTextOutput(JSON.stringify({ status: 'success', dossierId: dossierId, duplicate: true }))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
+    }
 
     // Insérer la nouvelle ligne
     sheet.appendRow([
