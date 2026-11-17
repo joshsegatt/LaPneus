@@ -6,7 +6,7 @@ const DIST_DIR = path.join(ROOT_DIR, 'dist');
 const PREVIEW_DIR = path.join(ROOT_DIR, 'preview');
 const PUBLIC_DIR = path.join(ROOT_DIR, 'public');
 
-console.log('🚀 Démarrage du build de production pour Netlify...\n');
+console.log('🚀 Démarrage du build de production (Vercel)...\n');
 
 // 1. Nettoyer ou créer dist/
 if (fs.existsSync(DIST_DIR)) {
@@ -57,45 +57,8 @@ if (fs.existsSync(PUBLIC_DIR)) {
   }
 }
 
-// 4. Copier également preview/ dans dist/preview/ pour compatibilité totale d'URL
-copyDirSync(PREVIEW_DIR, path.join(DIST_DIR, 'preview'));
-console.log('✓ Copié: preview/ -> dist/preview/');
-
-// 5. Générer _redirects pour Netlify
-const redirectsContent = `# Redirections Netlify L.A Pneus
-/preview/index.html   /   301!
-/preview              /   301!
-/preview/tarifs.html  /tarifs   301!
-/tarifs               /tarifs.html   200
-`;
-fs.writeFileSync(path.join(DIST_DIR, '_redirects'), redirectsContent, 'utf-8');
-console.log('✓ Généré: dist/_redirects');
-
-// 6. Générer _headers pour Netlify (Performance & Sécurité)
-const headersContent = `/*
-  X-Frame-Options: SAMEORIGIN
-  X-XSS-Protection: 1; mode=block
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: geolocation=(self), camera=(), microphone=()
-
-/assets/*
-  Cache-Control: public, max-age=31536000, immutable
-
-/public/assets/*
-  Cache-Control: public, max-age=31536000, immutable
-
-/*.html
-  Cache-Control: public, max-age=0, must-revalidate
-
-/*.css
-  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
-
-/*.js
-  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
-`;
-fs.writeFileSync(path.join(DIST_DIR, '_headers'), headersContent, 'utf-8');
-console.log('✓ Généré: dist/_headers');
+// 4-6. Redirections, en-têtes et cache : voir vercel.json (la Vercel ignore _redirects/_headers).
+//      preview/ n'est plus copié dans dist/ pour éviter une copie indexable du site.
 
 // 7. Vérification d'intégrité des assets de index.html et tarifs.html
 console.log('\n🔍 Vérification de l\'intégrité des assets...');
@@ -116,7 +79,7 @@ for (const pageName of pagesToCheck) {
 
   while ((match = assetRegex.exec(htmlContent)) !== null) {
     let ref = match[1].split('?')[0].split('#')[0].trim();
-    if (ref.startsWith('http') || ref.startsWith('tel:') || ref.startsWith('mailto:') || ref.startsWith('#') || ref === '') {
+    if (ref.startsWith('http') || ref.startsWith('tel:') || ref.startsWith('mailto:') || ref.startsWith('#') || ref === '' || (ref.startsWith('/') && !path.extname(ref))) {
       continue;
     }
     totalCheckedCount++;
